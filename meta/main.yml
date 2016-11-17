@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Pontus Wiberg
+  description:
+  min_ansible_version: 2.0
+  platforms:
+  - name: EL
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all

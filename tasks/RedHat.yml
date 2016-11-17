@@ -1,0 +1,44 @@
+- name: install X11
+  shell: 'yum groups install -y "X Window System"'
+
+- name: install desktop environment KDE
+  yum: name="@^KDE Plasma Workspaces" state=present enablerepo=epel
+  when: linux_desktop == 'kde'
+
+- name: install desktop environment Cinnamon
+  yum: name="cinnamon*" state=present enablerepo=epel
+  when: linux_desktop == 'cinnamon'
+
+- name: Cinnamon needs a terminal
+  yum: name="gnome-terminal" state=present enablerepo=epel
+  when: linux_desktop == 'cinnamon'
+
+- name: install desktop environment Gnome
+  yum: name="@^Gnome Desktop" state=present enablerepo=epel
+  when: linux_desktop == 'gnome'
+
+- name: install desktop environment Mate
+  yum: name="@^MATE Desktop" state=present enablerepo=epel
+  when: linux_desktop == 'mate'
+
+- name: install desktop environment Xfce
+  yum: name=@Xfce state=present enablerepo=epel
+  when: linux_desktop == 'xfce'
+
+- name: create xinitrc
+  file:
+   path: '/home/{{linux_desktop_user}}/.xinitrc'
+   state: touch
+  when: linux_desktop == 'xfce' or linux_desktop == 'mate' or linux_desktop == 'cinnamon'
+
+- name: xinitrc xfce
+  lineinfile: line="exec /usr/bin/xfce4-session" dest='/home/{{linux_desktop_user}}/.xinitrc'
+  when: linux_desktop == 'xfce'
+
+- name: xinitrc mate
+  lineinfile: line="exec /usr/bin/mate-session" dest='/home/{{linux_desktop_user}}/.xinitrc'
+  when: linux_desktop == 'mate'
+
+- name: xinitrc cinnamon
+  lineinfile: line="exec /usr/bin/cinnamon-session" dest='/home/{{linux_desktop_user}}/.xinitrc'
+  when: linux_desktop == 'cinnamon'

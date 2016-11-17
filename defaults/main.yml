@@ -1,0 +1,1 @@
+linux_desktop_user: "{{ansible_user_id}}"

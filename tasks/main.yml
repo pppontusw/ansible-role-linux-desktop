@@ -1,0 +1,17 @@
+- include: "{{ ansible_os_family }}.yml"
+  when: linux_desktop is defined
+  become: yes
+
+- name: get default runlevel
+  shell: 'systemctl get-default'
+  register: runlevel
+  when: (linux_desktop is defined and linux_boot_to_desktop is defined) and
+        (linux_boot_to_desktop)
+  become: yes
+  
+- name: Set graphical runlevel
+  shell: 'systemctl set-default graphical.target'
+  when: (linux_desktop is defined and linux_boot_to_desktop is defined) and
+        (linux_boot_to_desktop) and 
+        (runlevel.stdout != "graphical.target")
+  become: yes

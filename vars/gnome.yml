@@ -1,0 +1,3 @@
+linux_desktop: gnome
+# uncomment to boot to desktop
+#linux_boot_to_desktop: true
