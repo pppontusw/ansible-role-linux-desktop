@@ -6,6 +6,7 @@
     state: present 
     install_recommends: yes
   when: linux_desktop == 'kde'
+  become: yes
 
 - name: install desktop environment Cinnamon
   apt:
@@ -18,6 +19,7 @@
     state: present 
     install_recommends: no
   when: linux_desktop == 'cinnamon'
+  become: yes
 
 - name: install desktop environment Gnome
   apt:
@@ -26,6 +28,7 @@
     state: present 
     install_recommends: no
   when: linux_desktop == 'gnome'
+  become: yes
 
 - name: install desktop environment Mate
   apt:
@@ -35,6 +38,7 @@
     state: present 
     install_recommends: no
   when: linux_desktop == 'mate'
+  become: yes
 
 - name: install desktop environment Xfce
   apt:
@@ -45,9 +49,11 @@
     state: present 
     install_recommends: no
   when: linux_desktop == 'xfce'
+  become: yes
 
 - name: install Xorg
   apt: 
     pkg:
       - xorg
     state: present
+  become: yes
