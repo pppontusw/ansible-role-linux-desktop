@@ -1,40 +1,59 @@
 - name: install desktop environment KDE
-  apt:  name={{ item }} state=present install_recommends=yes
-  with_items:
-    - kde-standard
-    - kde-plasma-desktop
+  apt:
+    pkg:
+      - kde-standard
+      - kde-plasma-desktop
+    state: present 
+    install_recommends: yes
   when: linux_desktop == 'kde'
+  become: yes
 
 - name: install desktop environment Cinnamon
-  apt:  name={{ item }} state=present install_recommends=no
-  with_items:
-    - cinnamon-core
-    - libgl1-mesa-dri 
-    - x11-xserver-utils
-    - gnome-terminal
-    - lightdm
+  apt:
+    pkg:
+      - cinnamon-core
+      - libgl1-mesa-dri 
+      - x11-xserver-utils
+      - gnome-terminal
+      - lightdm
+    state: present 
+    install_recommends: no
   when: linux_desktop == 'cinnamon'
+  become: yes
 
 - name: install desktop environment Gnome
-  apt:  name={{ item }} state=present install_recommends=no
-  with_items:
-    - gnome
+  apt:
+    pkg:
+      - gnome
+    state: present 
+    install_recommends: no
   when: linux_desktop == 'gnome'
+  become: yes
 
 - name: install desktop environment Mate
-  apt:  name={{ item }} state=present install_recommends=no
-  with_items:
-    - mate-desktop-environment
-    - lightdm
+  apt:
+    pkg:
+      - mate-desktop-environment
+      - lightdm
+    state: present 
+    install_recommends: no
   when: linux_desktop == 'mate'
+  become: yes
 
 - name: install desktop environment Xfce
-  apt:  name={{ item }} state=present install_recommends=no
-  with_items:
-    - xfce4
-    - xfce4-goodies
-    - lightdm
+  apt:
+    pkg:
+      - xfce4
+      - xfce4-goodies
+      - lightdm
+    state: present 
+    install_recommends: no
   when: linux_desktop == 'xfce'
+  become: yes
 
 - name: install Xorg
-  apt: name='xorg' state=present
+  apt: 
+    pkg:
+      - xorg
+    state: present
+  become: yes
